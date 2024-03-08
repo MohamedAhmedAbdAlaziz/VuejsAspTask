@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\task\\Backend\\API\\wwwroot\\Images\\5baaa4f0-1287-4120-b940-3ce3b739eb8e _Mountain View iCity October_Cover.png",
+      "PackagePath": "staticwebassets\\Images\\5baaa4f0-1287-4120-b940-3ce3b739eb8e _Mountain View iCity October_Cover.png"
+    },
+    {
+      "Id": "D:\\task\\Backend\\API\\wwwroot\\Images\\995f457b-e8f1-4895-b725-6d8fff83ab4d _Mountain View iCity October_Cover.png",
+      "PackagePath": "staticwebassets\\Images\\995f457b-e8f1-4895-b725-6d8fff83ab4d _Mountain View iCity October_Cover.png"
+    },
+    {
+      "Id": "D:\\task\\Backend\\API\\wwwroot\\Images\\c2dcdc18-0e57-4176-824c-c564d2e3edb0 _Mountain View iCity October_Cover.png",
+      "PackagePath": "staticwebassets\\Images\\c2dcdc18-0e57-4176-824c-c564d2e3edb0 _Mountain View iCity October_Cover.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.API.props",
+      "PackagePath": "build\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.API.props",
+      "PackagePath": "buildMultiTargeting\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.API.props",
+      "PackagePath": "buildTransitive\\API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

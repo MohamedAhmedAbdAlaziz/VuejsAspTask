@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "8rz8Stp+hhJTFxryLtHO/p6tYnvyOe4tGa2R6h9oioA=",
+  "Source": "API",
+  "BasePath": "_content/API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "API\\wwwroot",
+      "Source": "API",
+      "ContentRoot": "D:\\task\\Backend\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\task\\Backend\\API\\wwwroot\\Images\\5baaa4f0-1287-4120-b940-3ce3b739eb8e _Mountain View iCity October_Cover.png",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\task\\Backend\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "Images/5baaa4f0-1287-4120-b940-3ce3b739eb8e _Mountain View iCity October_Cover.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\5baaa4f0-1287-4120-b940-3ce3b739eb8e _Mountain View iCity October_Cover.png"
+    },
+    {
+      "Identity": "D:\\task\\Backend\\API\\wwwroot\\Images\\995f457b-e8f1-4895-b725-6d8fff83ab4d _Mountain View iCity October_Cover.png",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\task\\Backend\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "Images/995f457b-e8f1-4895-b725-6d8fff83ab4d _Mountain View iCity October_Cover.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\995f457b-e8f1-4895-b725-6d8fff83ab4d _Mountain View iCity October_Cover.png"
+    },
+    {
+      "Identity": "D:\\task\\Backend\\API\\wwwroot\\Images\\c2dcdc18-0e57-4176-824c-c564d2e3edb0 _Mountain View iCity October_Cover.png",
+      "SourceId": "API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\task\\Backend\\API\\wwwroot\\",
+      "BasePath": "_content/API",
+      "RelativePath": "Images/c2dcdc18-0e57-4176-824c-c564d2e3edb0 _Mountain View iCity October_Cover.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\c2dcdc18-0e57-4176-824c-c564d2e3edb0 _Mountain View iCity October_Cover.png"
+    }
+  ]
+}
