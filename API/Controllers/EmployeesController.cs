@@ -34,7 +34,7 @@ namespace API.Controllers
         {
             string Role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
             var employeeSpecification = new EmployeeSpecification();
-           
+               
 
             if (Role.ToLower().Trim()!= "admin")
             { 
@@ -69,9 +69,9 @@ namespace API.Controllers
             });
         }
  
-        [HttpPut()]
+        [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UpdateEmployee( int id, [FromForm] EmployeeDTO model)
+        public async Task<ActionResult> UpdateEmployee(int id,[FromForm] EmployeeDTO model)
         {
            if(id!= model.Id)
             {
@@ -80,7 +80,7 @@ namespace API.Controllers
             string? UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if(UserId == null)
             {
-                return Unauthorized();
+                return Unauthorized(new FailResponse(401));
             }
             Employee updatedEmployee = new Employee
             {
@@ -94,7 +94,6 @@ namespace API.Controllers
 
             };
             _unitOfWork.Repository<Employee>().Update(updatedEmployee);
-
             try
             {
                 await _unitOfWork.Complete();
@@ -102,11 +101,8 @@ namespace API.Controllers
             catch
             {
                 return StatusCode(500, new FailResponse(500) { Errors = new string[] { "there is an error where update this Employee" } });
-
             }
-
             return Ok(new SucceededRespone(200) { Data = model, Message = "updated succeessfully" });
-
         }
 
         [HttpPost]
@@ -136,7 +132,7 @@ namespace API.Controllers
             }
 
 
-            return CreatedAtAction("GetUserFCMBy", new { id = newEmployee.Id }, new SucceededRespone(201) { Data = newEmployee });
+            return CreatedAtAction("GetEmployeeByID", new { id = newEmployee.Id }, new SucceededRespone(201) { Data = newEmployee });
 
         }
         [HttpDelete("{id}")]

@@ -15,7 +15,7 @@ namespace API.Error
         public string[] Errors { get; set; }
         private string[] GetDefaultErrorForStatusCode(int statusCode)
         {
-            string? result = statusCode switch
+            string result = statusCode switch
             { 
                 400 => "A bad request,you have made",
                 403 => "A validation errors",

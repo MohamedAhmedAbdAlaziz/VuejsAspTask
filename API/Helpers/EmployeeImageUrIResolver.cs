@@ -18,7 +18,7 @@ namespace API.Helpers
         {
             if (!string.IsNullOrEmpty(source.ImageUrI))
             {
-                return $"{_config["ApiUrl"]}/Images/{source.ImageUrI}";
+                return $"{_config["ApiUrl"]}Images/{source.ImageUrI}";
             }
             return null;
 

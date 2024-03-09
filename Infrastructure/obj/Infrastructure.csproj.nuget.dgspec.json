@@ -1,21 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\task\\Backend\\Infrastructure\\Infrastructure.csproj": {}
+    "E:\\Kudvanent\\Backend\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\task\\Backend\\Core\\Core.csproj": {
+    "E:\\Kudvanent\\Backend\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\task\\Backend\\Core\\Core.csproj",
+        "projectUniqueName": "E:\\Kudvanent\\Backend\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "D:\\task\\Backend\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "D:\\task\\Backend\\Core\\obj\\",
+        "projectPath": "E:\\Kudvanent\\Backend\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\LAPTOP\\.nuget\\packages\\",
+        "outputPath": "E:\\Kudvanent\\Backend\\Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\LAPTOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -61,22 +67,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\task\\Backend\\Infrastructure\\Infrastructure.csproj": {
+    "E:\\Kudvanent\\Backend\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\task\\Backend\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "E:\\Kudvanent\\Backend\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "D:\\task\\Backend\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\Dell\\.nuget\\packages\\",
-        "outputPath": "D:\\task\\Backend\\Infrastructure\\obj\\",
+        "projectPath": "E:\\Kudvanent\\Backend\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\LAPTOP\\.nuget\\packages\\",
+        "outputPath": "E:\\Kudvanent\\Backend\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\LAPTOP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -89,8 +101,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\task\\Backend\\Core\\Core.csproj": {
-                "projectPath": "D:\\task\\Backend\\Core\\Core.csproj"
+              "E:\\Kudvanent\\Backend\\Core\\Core.csproj": {
+                "projectPath": "E:\\Kudvanent\\Backend\\Core\\Core.csproj"
               }
             }
           }
@@ -150,7 +162,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
