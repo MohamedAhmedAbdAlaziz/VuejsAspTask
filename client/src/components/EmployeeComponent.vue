@@ -129,6 +129,7 @@ export default {
       } catch (error) {
         console.log(error);
         this.$router.push('/AccessDenied');
+
         console.error('Failed to fetch employee:', error);
       }
     },
@@ -193,6 +194,7 @@ export default {
           this.$router.push('/');
         } catch (error) {
           console.error('Failed to submit form:', error.errors);
+          alert(error.response.data?.errors[0]);
         }
       }
     },

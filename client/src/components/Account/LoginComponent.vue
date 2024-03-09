@@ -1,25 +1,30 @@
 <template>
   <div class="login-container">
-     <div class="login">
-       <h2>Login</h2>
-       <form @submit.prevent="LoginUser">
-         <div class="form-group">
-           <label for="username">Username</label>
-           <input type="text" id="username" v-model="username" />
-           <span class="error" v-if="errors.username">{{ errors.username }}</span>
-         </div>
-         <div class="form-group">
-           <label for="password">Password</label>
-           <input type="password" id="password" v-model="password" />
-           <span class="error" v-if="errors.password">{{ errors.password }}</span>
-         </div>
-         <button type="submit">Login</button> OR  
-          <router-link width="150px" class="btn btn"  to="/Acount/Register">Register</router-link>
-       </form>
-     </div>
-   </div>
- </template>
- 
+    <div class="login">
+      <h2>Login</h2>
+      <form @submit.prevent="LoginUser">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" v-model="username" />
+          <span class="error" v-if="errors.username">{{
+            errors.username
+          }}</span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" v-model="password" />
+          <span class="error" v-if="errors.password">{{
+            errors.password
+          }}</span>
+        </div>
+        <button type="submit">Login</button> OR
+        <router-link width="150px" class="btn btn" to="/Acount/Register"
+          >Register</router-link
+        >
+      </form>
+    </div>
+  </div>
+</template>
 
 <script>
 import axios from 'axios';
@@ -28,53 +33,53 @@ export default {
   data() {
     return {
       errors: {},
-      username: '',      
+      username: '',
       password: '',
-     
-   
     };
   },
   async created() {
-     
     console.log(this.$store);
   },
   methods: {
-  
-  validateusername() {
-    this.errors.username = this.username ? '' : 'username is required';
-  },
-  
-  validatePassword() {
-    this.errors.password = this.password.length >= 8 ? '' : 'Password must be at least 8 characters';
-  },
-  
-    
+    validateusername() {
+      this.errors.username = this.username ? '' : 'username is required';
+    },
+
+    validatePassword() {
+      this.errors.password =
+        this.password.length >= 8
+          ? ''
+          : 'Password must be at least 8 characters';
+    },
+
     async LoginUser() {
       this.validateusername();
-     this.validatePassword();
-if(Object.values(this.errors).every(error => !error)){
-  try {
-        const response = await axios.post('https://localhost:7181/api/account/login', {
-          username: this.username,
-          password: this.password,
-        });
-        console.log('login successful:', response.data);
-      let data =response.data;
-       localStorage.setItem('userData', data.data);
-        localStorage.setItem('jwt', response.data.data.jwt);
-         console.log(this.$store);  
-        this.$store.commit('login');
-        this.$router.push('/');
-             } catch (error) {
-        console.error('Registration failed:', error.response?.data);
+      this.validatePassword();
+      if (Object.values(this.errors).every((error) => !error)) {
+        try {
+          const response = await axios.post(
+            'https://localhost:7181/api/account/login',
+            {
+              username: this.username,
+              password: this.password,
+            }
+          );
+          console.log('login successful:', response.data);
+          let data = response.data;
+          localStorage.setItem('userData', data.data);
+          localStorage.setItem('jwt', response.data.data.jwt);
+          console.log(this.$store);
+          this.$store.commit('login');
+          this.$router.push('/');
+        } catch (error) {
+          alert(error.response.data?.errors[0]);
+          console.error('Registration failed:', error.response?.data);
+        }
       }
-}
-    
-    }
-  }
+    },
+  },
 };
 </script>
-
 
 <style>
 .login-container {
@@ -85,7 +90,7 @@ if(Object.values(this.errors).every(error => !error)){
 }
 
 .login {
-   width: 500px;
+  width: 500px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -100,9 +105,9 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input[type='text'],
+input[type='email'],
+input[type='password'] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -128,9 +133,6 @@ button:hover {
 }
 </style>
 
-
-
- 
 <style>
 .register-container {
   display: flex;
@@ -140,7 +142,7 @@ button:hover {
 }
 
 .register {
-   width: 500px;
+  width: 500px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -155,9 +157,9 @@ label {
   margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input[type='text'],
+input[type='email'],
+input[type='password'] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
