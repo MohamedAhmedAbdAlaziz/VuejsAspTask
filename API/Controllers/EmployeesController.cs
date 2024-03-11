@@ -14,9 +14,7 @@ using System.Security.Claims;
 namespace API.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : BaseApiController
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _webHostEnvironment;
@@ -28,15 +26,16 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
         }
-
+        // Get ALL Employees 
         [HttpGet]
         public async Task<ActionResult> GetAllEmployees()
         {
+            // check if Role type at the first
+            // if Role is Admin get AllEmployees 
+            // else it is a normal get just just Employees created by cuurent User
             string Role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
             var employeeSpecification = new EmployeeSpecification();
-               
-
-            if (Role.ToLower().Trim()!= "admin")
+            if (Role != null &&  Role.ToLower().Trim()!= "admin")
             { 
                 string UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                  employeeSpecification.FiltersByCreatedBy(UserId);
@@ -54,46 +53,38 @@ namespace API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> GetEmployeeByID(int id)
         {
-            string? Role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+            string Role = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
             var employeeSpecification = new EmployeeSpecification(id);
-            if (Role.ToLower().Trim() != "admin")
-            {
-                string UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-                employeeSpecification.FiltersByCreatedBy(UserId);
-            }
-            Employee employee = await _unitOfWork.Repository<Employee>().GetEntityWithSpec(employeeSpecification);
+             Employee employee = await _unitOfWork.Repository<Employee>().GetEntityWithSpec(employeeSpecification);
             var employeeDTO = _mapper.Map<Employee, EmployeeDTO>(employee);
             return Ok(new SucceededRespone(200)
             {
                 Data = employeeDTO
             });
         }
- 
+         
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateEmployee(int id,[FromForm] EmployeeDTO model)
         {
            if(id!= model.Id)
             {
-                return BadRequest(new FailResponse(400) { Errors = new string[] { "there is an error where update this Employee" } });
+                return BadRequest(new FailResponse(400) { Errors = new string[] { "there is an error while updating this Employee" } });
             }
-            string? UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            if(UserId == null)
+           
+            string UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if(UserId != null &&  UserId == null)
             {
                 return Unauthorized(new FailResponse(401));
             }
-            Employee updatedEmployee = new Employee
-            {
-                Id=model.Id,
-                Name = model.Name,
-                Email = model.Email,
-                PhoneNumber = model.PhoneNumber,
-                GraduationStatus = model.GraduationStatus,
-                ImageUrI = SortImage(model.Photo),
-                CreatedBy = UserId
+            var employeeSpecification = new EmployeeSpecification(model.Id);
+               Employee employee = await _unitOfWork.Repository<Employee>().GetEntityWithSpec(employeeSpecification);
 
-            };
-            _unitOfWork.Repository<Employee>().Update(updatedEmployee);
+               employee.Name = model.Name;
+               employee.Email = model.Email;
+               employee.PhoneNumber = model.PhoneNumber;
+               employee.GraduationStatus = model.GraduationStatus;
+               employee.ImageUrI = model.Photo == null ? employee.ImageUrI : SortImage(model.Photo);          
             try
             {
                 await _unitOfWork.Complete();
@@ -102,22 +93,29 @@ namespace API.Controllers
             {
                 return StatusCode(500, new FailResponse(500) { Errors = new string[] { "there is an error where update this Employee" } });
             }
-            return Ok(new SucceededRespone(200) { Data = model, Message = "updated succeessfully" });
+            return Ok(new SucceededRespone(200) { Data = employee, Message = "updated succeessfully" });
         }
 
         [HttpPost]
         public async Task<ActionResult> PostEmployee([FromForm] EmployeeDTO model)
         {
-             string UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-              
+            var employeeSpecification = new EmployeeSpecification();
+            employeeSpecification.FiltersByEmail(model.Email);
+            Employee employee = await _unitOfWork.Repository<Employee>().GetEntityWithSpec(employeeSpecification);
+            
+            if (employee != null&& employee.Email == model.Email)
+            {
+                return BadRequest(new FailResponse(400) { Errors = new string[] { "this email is token" } });
+            }
 
-                Employee newEmployee = new Employee
+            string UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            Employee newEmployee = new Employee
                 {
                     Name = model.Name,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     GraduationStatus= model.GraduationStatus,
-                    ImageUrI = SortImage(model.Photo),
+                    ImageUrI =  SortImage(model.Photo),
                     CreatedBy= UserId
 
                 };
@@ -128,7 +126,7 @@ namespace API.Controllers
             }
             catch
             {
-                return StatusCode(500, new FailResponse(500) { Errors = new string[] { "error while Creating this Employee" } });
+                return StatusCode(500, new FailResponse(500) { Errors = new string[] { "Error while Creating this Employee" } });
             }
 
 
@@ -151,6 +149,8 @@ namespace API.Controllers
             return Ok(new SucceededRespone(200, "deleted succeessfully"));
         }
 
+
+        #region Sort Image
         private string SortImage(IFormFile Photo)
         {
             string uniqueFileName = "";
@@ -162,6 +162,9 @@ namespace API.Controllers
             return uniqueFileName;
         }
 
-       
+        #endregion
+
+
+
     }
 }

@@ -14,9 +14,8 @@ using System.Text;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AccountController : ControllerBase
+    
+    public class AccountController : BaseApiController
     {
         private readonly JWTService _jwtService;
         private readonly SignInManager<User> _signInManager;
@@ -36,14 +35,14 @@ namespace API.Controllers
         }
         [Authorize]
         [HttpGet("refresh-user-token")]
-        public async Task<ActionResult<UserDto>> RefreshUserToken()
+        public async Task<ActionResult> RefreshUserToken()
         { 
             var user = await _userManager.FindByNameAsync(User.FindFirst(ClaimTypes.Email)?.Value);
-            return await _jwtService.CreateApplicationUserDto(user);
+            return Ok(new SucceededRespone(200) { Data = await _jwtService.CreateApplicationUserDto(user) });
 
         }
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto model)
+        public async Task<ActionResult> Login(LoginDto model)
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user == null)
@@ -57,7 +56,7 @@ namespace API.Controllers
              return Ok(new SucceededRespone(200) { Data = await _jwtService.CreateApplicationUserDto(user) });
         }
         [HttpGet("AllRoles")]
-        public async Task<ActionResult<IEnumerable<IdentityRole>>> GetAllRoles()
+        public async Task<ActionResult> GetAllRoles()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return Ok(new SucceededRespone(200) { Data=roles});
@@ -69,12 +68,12 @@ namespace API.Controllers
 
             if (await CheckExistsAsync(model.Email))
             {
-             return BadRequest(new FailResponse(400) { Errors = new string[] { $"An existes account is using {model.Email}, email address, Please try with anouther email address" } });
+             return BadRequest(new FailResponse(400) { Errors = new string[] { $"An existes account is using {model.Email}, email address, Please try with another email address" } });
             }
             var role = await _roleManager.FindByIdAsync(model.Role);
             if (role == null)
             {
-                return BadRequest(new FailResponse(400) { Errors = new string[] { "" } });
+                return BadRequest(new FailResponse(400));
 
             }
             var userToAdd = new User
@@ -82,15 +81,13 @@ namespace API.Controllers
                 FirstName = model.FirstName.ToLower(),
                 LastName = model.LastName.ToLower(),
                 UserName = model.Email.ToLower(),
-                Email = model.Email.ToLower(),
-            
+                Email = model.Email.ToLower(), 
                 EmailConfirmed = true
             };
             var result = await _userManager.CreateAsync(userToAdd, model.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(new FailResponse(400) { Errors = new string[] { "There are errors in creating User" } }); 
-                   
             }
             result = await _userManager.AddToRoleAsync(userToAdd, role.Name);
             if (!result.Succeeded)
@@ -101,8 +98,7 @@ namespace API.Controllers
 
             return Ok(new SucceededRespone(200) { Data = await _jwtService.CreateApplicationUserDto(userToAdd) });
         }
-        #region 
-       
+        #region Check Email Exist 
 
         private async Task<bool> CheckExistsAsync(string email)
         {

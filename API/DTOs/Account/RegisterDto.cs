@@ -15,6 +15,7 @@ namespace Api.DTOs.Account
         [Required]
         [StringLength(15, MinimumLength = 6, ErrorMessage = "Password must be at least {2}, and maximum {1} characters")]
         public string Password { get; set; }
+
         public string Role { get; set; }
     }
 }

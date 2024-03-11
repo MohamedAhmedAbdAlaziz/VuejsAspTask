@@ -34,7 +34,7 @@ namespace Core.SpecificationModel
 
     public bool IsPagingEnabled { get; private set; }
 
-        //   public int m {get;}
+       
         protected void Filter(Expression<Func<T, bool>> filter)
         {
             Criteria = filter;

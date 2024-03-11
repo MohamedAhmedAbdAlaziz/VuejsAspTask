@@ -55,6 +55,10 @@ export default {
   },
   methods: {
     async fetchEmployees() {
+      if (!this.$store.state.isAuthenticated) {
+        this.$router.push('/Acount/Login');
+        return;
+      }
       try {
         const response = await axios.get(
           'https://localhost:7181/api/Employees',
@@ -95,7 +99,7 @@ export default {
         );
       } catch (error) {
         if (!error.response?.data.status) {
-          alert(error.response.data?.message);
+          alert(error.response.message);
         }
         console.error('Failed to delete employee:', error);
       }

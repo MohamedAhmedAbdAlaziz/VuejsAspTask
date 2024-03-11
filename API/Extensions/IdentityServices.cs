@@ -44,7 +44,7 @@ namespace API.Extensions;
                     ValidIssuer = config["JWT:Issuer"],
                     // validate the issuer (who ever is issuing the JWT)
                     ValidateIssuer = true,
-                    // don't validate audience (angular side)
+                    // don't validate audience (Vue js side)
                     ValidateAudience = false
                 };
             });

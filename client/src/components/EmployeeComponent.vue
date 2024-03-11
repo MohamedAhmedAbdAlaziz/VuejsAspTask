@@ -91,6 +91,10 @@ export default {
     };
   },
   mounted() {
+    if (!this.$store.state.isAuthenticated) {
+      this.$router.push('/Acount/Login');
+      return;
+    }
     if (this.$route.params.id) {
       // If an employee ID is provided in the route params, switch to edit mode
       this.mode = 'edit';
@@ -194,7 +198,7 @@ export default {
           this.$router.push('/');
         } catch (error) {
           console.error('Failed to submit form:', error.errors);
-          alert(error.response.data?.errors[0]);
+          alert(error.response.data?.errors);
         }
       }
     },

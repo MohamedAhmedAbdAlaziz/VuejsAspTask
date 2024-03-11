@@ -38,6 +38,10 @@ export default {
     };
   },
   async created() {
+    if (this.$store.state.isAuthenticated) {
+      this.$router.push('/');
+      return;
+    }
     console.log(this.$store);
   },
   methods: {
@@ -65,10 +69,8 @@ export default {
             }
           );
           console.log('login successful:', response.data);
-          let data = response.data;
-          localStorage.setItem('userData', data.data);
           localStorage.setItem('jwt', response.data.data.jwt);
-          console.log(this.$store);
+
           this.$store.commit('login');
           this.$router.push('/');
         } catch (error) {

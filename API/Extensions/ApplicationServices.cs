@@ -13,7 +13,7 @@ namespace API.Extensions;
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<JWTService>();
-        services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
+            services.AddScoped(typeof(IGenericRepository<>), (typeof(GenericRepository<>)));
             services.AddAutoMapper(typeof(MappingProfiles));
       
         return services;

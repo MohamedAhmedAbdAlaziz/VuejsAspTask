@@ -13,7 +13,10 @@ namespace API.Services
         {
             
         }
-
+        public void FiltersByEmail(string Email)
+        {
+            Filter(x => x.Email == Email);;
+        }
         public void FiltersByCreatedBy(string userId)
         {
             Filter(x => x.CreatedBy == userId);
